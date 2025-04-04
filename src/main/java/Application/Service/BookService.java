@@ -1,8 +1,10 @@
 package Application.Service;
 
 import Application.DAO.BookDAO;
+import Application.Model.Author;
 import Application.Model.Book;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -40,7 +42,8 @@ public class BookService {
      * @return all books.
      */
     public List<Book> getAllBooks() {
-        return null;
+        List<Book> books = new LinkedList<Book>(this.bookDAO.getAllBooks());
+        return books;
     }
     /**
      * TODO: Use the bookDAO to persist a book to the database.
@@ -51,15 +54,19 @@ public class BookService {
      * key was already in use.)
      */
     public Book addBook(Book book) {
-
-        return null;
+        if (this.bookDAO.getBookByIsbn(book.getIsbn()) != null) {
+            return null;
+        }
+        Book newBook = this.bookDAO.insertBook(book);
+        return newBook;
     }
     /**
      * TODO: Use the bookDAO to retrieve a list of all books that have a bookCount above 0.
      * @return all available books (bookCount over zero)
      */
     public List<Book> getAllAvailableBooks() {
-        return null;
+        List<Book> availableBooks = new LinkedList<Book>(this.bookDAO.getBooksWithBookCountOverZero());
+        return availableBooks;
     }
 
 }

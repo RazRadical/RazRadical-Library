@@ -3,6 +3,7 @@ package Application.Service;
 import Application.Model.Author;
 import Application.DAO.AuthorDAO;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -40,7 +41,8 @@ public class AuthorService {
      * @return all authors
      */
     public List<Author> getAllAuthors() {
-        return null;
+        List<Author> authors = new LinkedList<Author>(this.authorDAO.getAllAuthors());
+        return authors;
     }
     /**
      * TODO: Use the AuthorDAO to persist an author. The given Author will not have an id provided.
@@ -49,6 +51,7 @@ public class AuthorService {
      * @return The persisted author if the persistence is successful.
      */
     public Author addAuthor(Author author) {
-        return null;
+        Author newAuthor = this.authorDAO.insertAuthor(author);
+        return newAuthor;
     }
 }
